@@ -1,6 +1,8 @@
 """
 207 course schedule
 topological, bfs
+time space: o(m) + o(n)
+space: o(m) + o(n)
 """
 from collections import deque
 
@@ -15,7 +17,7 @@ class Solution:
         seen_cnt = 0
 
         for course in prerequisites:
-            alist[course[1]].append(prerequisites[course[0]])
+            alist[course[1]].append(course[0])
             indegree[course[0]] += 1
 
         queue = deque()
