@@ -21,6 +21,7 @@ class Solution:
         res = []
         self.helper(root, 0, [])
         return res
+
     def helper(self, root, level, res):
         # when len of res is 0, which means we start to put ele into it, and its idx is related to the level.
         level_size = len(res)
@@ -28,9 +29,9 @@ class Solution:
             res.append([])
         res[level].append(root.val)
         if root.left:
-            self.helper(root.left, level+1, res)
+            self.helper(root.left, level + 1, res)
         if root.right:
-            self.helper(root.right, level+1, res)
+            self.helper(root.right, level + 1, res)
     # solution 2
         if not root:
             return []

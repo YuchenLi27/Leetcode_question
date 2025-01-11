@@ -8,7 +8,7 @@ from collections import deque
 
 
 class Solution:
-    def canFinish(self, numCourses: int, prerequisites: List[List[]]):
+    def canFinish(self, numCourses, prerequisites):
         #  build a adj list
         alist = [[] for _ in range(numCourses)]
         # maintain the indegree
