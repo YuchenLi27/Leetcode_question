@@ -15,7 +15,7 @@ class Solution:
 
     # get the current_val and its remain(target - current_val), then to check if there is any ele can make the remain val.
     # the content of return will be the combination of remain val form candidates list
-    # the fomrat of return is list of list,
+    # the format of return is list of list,
     # return [[2, 2, 3], [3, 5]]
     # if cannot find any meaningful result, return []
 
