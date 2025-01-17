@@ -13,6 +13,7 @@ we can use recursive to do so
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        # remember to check if given nodes are exist
         if not root or root == p or root == q:
             return root
 
