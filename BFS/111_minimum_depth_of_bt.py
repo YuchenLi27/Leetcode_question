@@ -30,3 +30,23 @@ class Solution:
                     queue.append(root.right)
             depth += 1
         return -1
+"""
+similar question 104, which is looking for to get an answer of maximum depth of BT
+dfs is a good idea to do so. But for bfs, by using deque() is also possible
+
+"""
+class Solution:
+    def maxDepth(self, root2):
+        if not root2:
+            return 0
+        queue = deque([root2])
+        depth = 0
+        while len(queue) != 0:
+            depth += 1
+            for _ in range(len(queue)):
+                ele = queue.popleft()
+                if ele.left:
+                    queue.append(ele.left)
+                if ele.right:
+                    queue.append(ele.right)
+        return depth
