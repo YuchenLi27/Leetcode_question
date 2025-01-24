@@ -4,9 +4,10 @@ solution1:
 1.recursion call, change level and node.left/right
 solution2:
 1.bfs, deque
+
+KEY POINT: when we traverse the bfs, we use deque, the length of deque means the length of the level.
 """
 from collections import deque
-
 
 class TreeNode:
     def __init__(self):
