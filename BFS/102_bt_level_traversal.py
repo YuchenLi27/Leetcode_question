@@ -5,7 +5,11 @@ solution1:
 solution2:
 1.bfs, deque
 
+=================
 KEY POINT: when we traverse the bfs, we use deque, the length of deque means the length of the level.
+can practice leetcode 637
+https://leetcode.com/problems/average-of-levels-in-binary-tree/
+=================
 """
 from collections import deque
 
