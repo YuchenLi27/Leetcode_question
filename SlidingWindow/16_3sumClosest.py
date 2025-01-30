@@ -1,8 +1,7 @@
 """
 this question is follow up of 3sum, but difference is this requires us to find the closest number to the 3sum
-
+two pointers
 """
-
 
 class Solution:
     def threeSumClosest(self, nums: List[int], target: int) -> int:
