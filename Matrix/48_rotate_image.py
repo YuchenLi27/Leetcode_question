@@ -1,6 +1,8 @@
 """
 this question aims to understand the rotation of matrix in different degree,
 like 90, 180, 270 degrees
+this question hope the matrix can rotate in 90 degree clock-wise, let the (l, r) exchange.
+and then reverse
 
 """
 from typing import List
