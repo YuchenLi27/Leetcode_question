@@ -29,3 +29,4 @@ class Bardocdes:
                 t, c = heapq.heappop(heap)
                 res.append(c)
         return res
+
