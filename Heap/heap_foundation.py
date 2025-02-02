@@ -30,23 +30,61 @@ class MinHeap(object):
 
     def heappop(self):
         if len(self.heap) == 1:
-            return None
-        
-
+            self.heap.pop()
+            return
+        self.heap[0] = self.heap[-1]
+        self.heap.pop()
+        self.heapify_down_helper(0)
 
     def heapify_down_helper(self, idx):
+        # if there is no left child which means, there is no right child
         right_child_idx = idx * 2 + 2
-        tmp = right_child_idx
-        right_child_idx = idx
-        idx = tmp
+        left_child_idx = idx * 2 + 1
+        # there is a left child but no right child
+        if left_child_idx == len(self.heap) - 1:
+            min_val = min(self.heap[idx], self.heap[left_child_idx])
+            if min_val == self.heap[left_child_idx]:
+                tmp = self.heap[idx]
+                self.heap[idx] = self.heap[left_child_idx]
+                self.heap[left_child_idx] = tmp
+                self.heapify_down_helper(left_child_idx)
+            return
+        # this node has no either left or right children
+        if left_child_idx > len(self.heap) - 1:
+            return
+
+        min_val = min(self.heap[idx], self.heap[right_child_idx], self.heap[left_child_idx])
+        if min_val == self.heap[right_child_idx]:
+            tmp = self.heap[idx]
+            self.heap[idx] = self.heap[right_child_idx]
+            self.heap[right_child_idx] = tmp
+            self.heapify_down_helper(right_child_idx)
+
+        if min_val == self.heap[left_child_idx]:
+            tmp = self.heap[idx]
+            self.heap[idx] = self.heap[left_child_idx]
+            self.heap[left_child_idx] = tmp
+            self.heapify_down_helper(left_child_idx)
 
 
-
+def heapsort(input_arr):
+    heap = MinHeap()
+    for ele in input_arr:
+        heap.append(ele)
+    res = []
+    for i in range(len(input_arr)):
+        num = heap.peek()
+        res.append(num)
+        heap.heappop()
+    return res
 
 
 if __name__ == '__main__':
-    test_heap = MinHeap()
-    test_heap.heap = [1, 2, 3, 4, 5, 7, 8, 9, 10]
-    test_heap.append(1.1)
-    print(test_heap.heap)
+    # test_heap = MinHeap()
+    # test_heap.heap = [1, 2, 3,4,5,6]
+    # test_heap.heappop()
+    # print(test_heap.heap)
 
+    input_arr = [3, 5,76,34,23,1,409,53,76]
+    sorted_arr = heapsort(input_arr)
+    print(sorted_arr)
