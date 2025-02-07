@@ -52,4 +52,3 @@ class Bardocdes:
 
         res = []
         while len(heap) > 0:
-            
