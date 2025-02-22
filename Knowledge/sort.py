@@ -6,7 +6,7 @@ def bubbleSort(array):
     n = len(array)
     for i in range(n):
         swapped = False
-        for j in range(0, n - 1 - i):
+        for j in range(0, n - 1 - i): # here is the way we use to confine the search scoope
             if array[j] > array[j + 1]:
                 array[j], array[j + 1] = array[j + 1], array[j]
                 swapped = True
@@ -37,8 +37,8 @@ def insertionSort(arr):
         ele = arr[i] # get the second ele
         j = i - 1 # get the one element before the current
         while j >= 0 and ele < arr[j]: # when the second ele < first ele
-            arr[j + 1] = arr[j] # switch the ele
-            j = j - 1 # update the first  element
+            arr[j + 1] = arr[j] # move the ele behind
+            j = j - 1 # update the first element
         arr[j + 1] = ele # otherwise, update the second to the first
 """
 counting sort: count the frequency of the numbers
