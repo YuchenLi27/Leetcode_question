@@ -13,7 +13,7 @@ class Solution:
         min_val = float("-inf")
 
         for i in preorder:
-            # if the first ele, which is current root,
+            # if the first ele, which is current root, we can use it to update
             # if the root is smaller than new ele, we update the min_val with the new ele
             # otherwise, we continue this comparison
             while stack and stack[-1] < i:
