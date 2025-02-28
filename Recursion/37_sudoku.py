@@ -1,18 +1,68 @@
 class Solution:
-    def solveSudoku(self, board):
+    def solveSudoku(self, board: List[List[str]]) -> None:
         """
         Do not return anything, modify board in-place instead.
         """
-        cols = len(board[0])
-        rows = len(board)
-        candidates = {1, 2, 3, 4, 5, 6, 7, 8, 9}
-        # 9 zones can be distinguished by mod 3
-        # 3 x 3
-        for row in rows:
-            for col in cols:
-                if row % 3 == col % 3:
-                    if board[row][col] in candidates:
-                        candidates.remove(board[row][col])
+        work_list = []
+        for row_i in range(9):
+            for col_i in range(9):
+                if board[row_i][col_i] == ".":
+                    work_list.append((row_i, col_i))
+        self.solve_single_point(board, work_list, 0)
+        return board
+
+    def solve_single_point(self, board, work_list, work_i):
+        if work_i >= len(work_list):
+            return True
+        cur_point = work_list[work_i]
+        point_candidate = self.get_candiadate_number(cur_point[0], cur_point[1], board)
+        if len(point_candidate) == 0:
+            return False
+
+        for num in point_candidate:
+            board[cur_point[0]][cur_point[1]] = num
+            result = self.solve_single_point(board, work_list, work_i + 1)
+            if result == True:
+                return True
+            else:
+                board[cur_point[0]][cur_point[1]] = "."
+        return False
+
+    def check_row_candidate(self, row_i, col_i, board):
+        full_set = set(["1", "2", "3", "4", "5", "6", "7", "8", "9"])
+        for i in range(9):
+            if board[row_i][i] != ".":
+                full_set.remove(board[row_i][i])
+        return full_set
+
+    def check_col_candidate(self, row_i, col_i, board):
+        full_set = set(["1", "2", "3", "4", "5", "6", "7", "8", "9"])
+        for i in range(9):
+            if board[i][col_i] != ".":
+                full_set.remove(board[i][col_i])
+        return full_set
+
+    def check_table_candidate(self, row_i, col_i, board):
+        full_set = set(["1", "2", "3", "4", "5", "6", "7", "8", "9"])
+        row_base = int(row_i / 3)
+        col_base = int(col_i / 3)
+        for row_delta in range(3):
+            row_index = row_base * 3 + row_delta
+            for col_delta in range(3):
+                col_index = col_base * 3 + col_delta
+                if board[row_index][col_index] != ".":
+                    full_set.remove(board[row_index][col_index])
+        return full_set
+
+    # return final candidate
+    def get_candiadate_number(self, row_i, col_i, board):
+        row_candidate = self.check_row_candidate(row_i, col_i, board)
+        col_candidate = self.check_col_candidate(row_i, col_i, board)
+        table_candidate = self.check_table_candidate(row_i, col_i, board)
+        final_candidate = row_candidate.intersection(col_candidate).intersection(table_candidate)
+        return final_candidate
+
+
 
 
 
