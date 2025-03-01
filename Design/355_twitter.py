@@ -121,8 +121,6 @@ class Twitter:
         #     res.append(first_ele[0])
         # return res
 
-
-
     def follow(self, followerId: int, followeeId: int) -> None:
         # poster: follower
         if followerId not in self.followers.keys():
@@ -133,6 +131,7 @@ class Twitter:
         if followerId in self.followers.keys():
             if followeeId in self.followers[followerId]:
                 self.followers[followerId].remove(followeeId)
+
 
 # we also can do improve by get only 10 users' posts
 class Twitter:
@@ -155,13 +154,13 @@ class Twitter:
     def getNewsFeed(self, userId: int) -> List[int]:
         all_users_posts = []
         all_posts = []
-        fans_post = []
         min_user_heap = []
 
         heapq.heapify(min_user_heap)
         if userId in self.posts:
             self_tuple = (self.user_lastest_timestamp[userId], userId)
             heapq.heappush(min_user_heap, self_tuple)
+
         if userId in self.followers:
             for fan in self.followers[userId]:
                 if fan in self.posts:
@@ -182,6 +181,7 @@ class Twitter:
         for list_of_post in all_users_posts:
             for tuple_of_list in list_of_post:
                 all_posts.append(tuple_of_list)
+
         minheap = []
         heapq.heapify(minheap)
         for post in all_posts:
