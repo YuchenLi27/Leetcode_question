@@ -3,68 +3,58 @@ class Solution:
         """
         Do not return anything, modify board in-place instead.
         """
-        work_list = []
-        for row_i in range(9):
-            for col_i in range(9):
-                if board[row_i][col_i] == ".":
-                    work_list.append((row_i, col_i))
-        self.solve_single_point(board, work_list, 0)
-        return board
-
-    def solve_single_point(self, board, work_list, work_i):
-        if work_i >= len(work_list):
+        worklist = []
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] == '.':
+                    worklist.append((i, j))
+        self.sovle_sigle_case(board, worklist, 0)
+    def sovle_sigle_case(self, board, worklist, work_idx):
+        if work_idx >= len(worklist):
             return True
-        cur_point = work_list[work_i]
-        point_candidate = self.get_candiadate_number(cur_point[0], cur_point[1], board)
-        if len(point_candidate) == 0:
+        cur = worklist[work_idx]
+        spare_cdd = self.get_cdd(board, cur[0], cur[1])
+        if len(spare_cdd) == 0:
             return False
 
-        for num in point_candidate:
-            board[cur_point[0]][cur_point[1]] = num
-            result = self.solve_single_point(board, work_list, work_i + 1)
-            if result == True:
+        for ele in spare_cdd:
+            board[cur[0]][cur[1]] = ele
+            res = self.sovle_sigle_case(board, worklist, work_idx + 1)
+            if res == True:
                 return True
             else:
-                board[cur_point[0]][cur_point[1]] = "."
+                board[cur[0]][cur[1]]== "."
         return False
 
-    def check_row_candidate(self, row_i, col_i, board):
-        full_set = set(["1", "2", "3", "4", "5", "6", "7", "8", "9"])
-        for i in range(9):
-            if board[row_i][i] != ".":
-                full_set.remove(board[row_i][i])
-        return full_set
 
-    def check_col_candidate(self, row_i, col_i, board):
-        full_set = set(["1", "2", "3", "4", "5", "6", "7", "8", "9"])
-        for i in range(9):
-            if board[i][col_i] != ".":
-                full_set.remove(board[i][col_i])
-        return full_set
+    def check_row(self, board, row):
+        cdd = {"1","2","3","4","5","6","7","8","9"}
+        for i in range(1, 10):
+            if board[row][i] in cdd:
+                cdd.remove(board[row][i])
+        return cdd
 
-    def check_table_candidate(self, row_i, col_i, board):
-        full_set = set(["1", "2", "3", "4", "5", "6", "7", "8", "9"])
-        row_base = int(row_i / 3)
-        col_base = int(col_i / 3)
-        for row_delta in range(3):
-            row_index = row_base * 3 + row_delta
-            for col_delta in range(3):
-                col_index = col_base * 3 + col_delta
-                if board[row_index][col_index] != ".":
-                    full_set.remove(board[row_index][col_index])
-        return full_set
+    def chcke_col(self, board, col):
+        cdd = {"1","2","3","4","5","6","7","8","9"}
+        for i in range(1, 10):
+            if board[i][col] in cdd:
+                cdd.remove(board[i][col])
+        return cdd
 
-    # return final candidate
-    def get_candiadate_number(self, row_i, col_i, board):
-        row_candidate = self.check_row_candidate(row_i, col_i, board)
-        col_candidate = self.check_col_candidate(row_i, col_i, board)
-        table_candidate = self.check_table_candidate(row_i, col_i, board)
-        final_candidate = row_candidate.intersection(col_candidate).intersection(table_candidate)
-        return final_candidate
-
-
-
-
-
-
-
+    def check_table(self, board, row, col):
+        zone_r = int(row / 3)
+        zone_c = int(col / 3)
+        cdd = {"1","2","3","4","5","6","7","8","9"}
+        for r_delta in range(3):
+            r_idx = zone_r * 3 + r_delta
+            for c_delta in range(3):
+                c_idx = zone_c * 3 + c_delta
+                if board[zone_r][zone_c] in cdd:
+                    cdd.remove(board[zone_r][zone_c])
+        return cdd
+    def get_cdd(self, board, row, col, cdd):
+        col_cdd = self.chcke_col(board, col)
+        row_cdd = self.check_row(board, row)
+        table_cdd = self.check_table(board,row, col)
+        fin_cdd = row_cdd.intersection(table_cdd).intersection(col_cdd)
+        return fin_cdd
