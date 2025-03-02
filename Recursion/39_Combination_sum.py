@@ -18,8 +18,7 @@ class Solution:
     # # the format of return is list of list,
     # # return [[2, 2, 3], [3, 5]]
     # # if cannot find any meaningful result, return []
-    #
-    #
+
     def helper_func(self, nums, goal, comb):
         res = []
         if goal == 0:

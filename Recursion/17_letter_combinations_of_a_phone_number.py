@@ -80,3 +80,47 @@ def helper(self,res,curr):
     return path
     
 """
+
+
+# def letterCombinations(self, digits: str) -> List[str]:
+# dic = {"2": "abc", "3": "def", "4": "ghi", "5": "jkl", "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"}
+#     if len(digits) == 0:
+#         return []
+#     so_far_list = []
+#     result = []
+#     self.xuan(so_far_list, digits, 0, dic, result)
+#     return result
+
+#     res = []
+#     if len(digits) == 0:
+#         return res
+#     self.helper(digits, 0, dic, [], res)
+#     return res
+
+# def helper(self, nums, curr, dic, path, res):
+#     if len(path) == len(nums):
+#         res.append("".join(path))
+#         return
+
+#     for ele in dic[nums[curr]]:
+#         path.append(ele)
+#         self.helper(nums, curr + 1, dic, path, res)
+#         path.pop()
+
+
+# def xuan(self, so_far_list, input_digit, cur_index, num_dic, result):
+#     cur_letter = num_dic[input_digit[cur_index]]
+#     for cur_char in cur_letter:
+#         so_far_list.append(cur_char)
+#         if cur_index == len(input_digit) - 1:
+#             temp_res = self.cal_so_far_list(so_far_list)
+#             result.append(temp_res)
+#         else:
+#             self.xuan(so_far_list, input_digit, cur_index+1, num_dic, result)
+#         so_far_list.pop()
+
+# def cal_so_far_list(self, so_far_list):
+#     result = ""
+#     for ele in so_far_list:
+#        result = result + ele
+#     return result
