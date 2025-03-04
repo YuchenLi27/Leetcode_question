@@ -154,13 +154,15 @@ class Twitter:
     def getNewsFeed(self, userId: int) -> List[int]:
         all_users_posts = []
         all_posts = []
-        min_user_heap = []
+        min_user_heap = [] # (timestamp, user_id)
 
         heapq.heapify(min_user_heap)
+        #  get the current user's posts
         if userId in self.posts:
             self_tuple = (self.user_lastest_timestamp[userId], userId)
             heapq.heappush(min_user_heap, self_tuple)
 
+        # get current user's followers' posts
         if userId in self.followers:
             for fan in self.followers[userId]:
                 if fan in self.posts:
@@ -174,11 +176,13 @@ class Twitter:
                             heapq.heappop(min_user_heap)
                             heapq.heappush(min_user_heap, fan_tuple)
 
+        # get all posts from the all relative users
         for user_tuple in min_user_heap:
             user_id = user_tuple[1]
             all_users_posts.append(self.posts[user_id])
 
-        for list_of_post in all_users_posts:
+        # get posts from the list of lists
+        for list_of_post in all_users_posts: # all_users_posts = [[(1,3), (2,3)], [(3, 110)], [(4, 115), (5, 120)]]
             for tuple_of_list in list_of_post:
                 all_posts.append(tuple_of_list)
 
@@ -199,7 +203,7 @@ class Twitter:
             res.append(post[1])
         reverse_res = []
         for index in range(len(res)):
-            reverse_res.append(res[len(res) - 1 - index])
+            reverse_res.append(res[len(res) - 1 - index]) # len(res) - 1 - index: here to reverse the list
         return reverse_res
 
     def follow(self, followerId: int, followeeId: int) -> None:

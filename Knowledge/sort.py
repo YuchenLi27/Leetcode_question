@@ -40,12 +40,15 @@ def insertionSort(arr):
             arr[j + 1] = arr[j] # move the ele behind
             j = j - 1 # update the first element
         arr[j + 1] = ele # otherwise, update the second to the first
+
 """
 counting sort: count the frequency of the numbers
 find the min/max element, create the count array, then count the number
 
 """
-def countSort(array):
+
+
+def countingSort(array):
     max_ele = max(array)
     count = (max_ele + 1) * [0] #initialize the count array
     for i in array: # put the number into the count array
@@ -54,6 +57,7 @@ def countSort(array):
     for i in range(len(count)): # get the result
         res.extend([i * count[i]])
     return res
+
 """
 bucket sort: hava buckets, sort buckets, merge
 bucket sort needs to combine with other sort like insertion sort
