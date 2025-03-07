@@ -24,7 +24,7 @@ from collections import deque
 
 """
 class Solution:
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+    def isValidBST(self, root):
         def bfs(root):
             # we set the min and max value to limit the node
             min_val = float("-inf")
@@ -50,4 +50,7 @@ class Solution:
             return True
         return bfs(root)
 # time/space: o(n)
+if __name__ == "__main__":
+    s = Solution()
+    print(s.isValidBST([1, None, 0, 3]))
 
