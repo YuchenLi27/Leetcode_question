@@ -9,6 +9,18 @@ class TreeNode:
 
 class Solution:
     def inorderSuccessor(self, root, p):
-        if p is None:
+        if p == None or root == None:
             return None
+
+        head = None
         if root != None:
+            if p.val > root.val:
+                root = root.left
+            else:
+                head = root
+                root = root.right
+        return head
+
+if __name__ == "__main__":
+    s = Solution()
+    print(s.inorderSuccessor([2,1,3], 2))
