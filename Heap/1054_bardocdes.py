@@ -2,6 +2,7 @@
 construct a new array that selected elements from one of each barcodes
  heap
 """
+import collections
 import heapq
 from collections import Counter, defaultdict
 
@@ -30,6 +31,25 @@ class Bardocdes:
     #             t, c = heapq.heappop(heap)
     #             res.append(c)
     #     return res
+    def heap_soulution(self, barcodes):
+        res = []
+        heap = []
+        cnts = collections.Counter(barcodes)
+        for key, value in cnts.items():
+            heap.append([(-value, key)])
+
+        heapq.heapify(heap)
+        item = heapq.heappop()
+        for i in range(len(barcodes)):
+            res.append(item[1])
+            item[0] += 1
+            res[i] = item[1]
+            if cnts:
+                item = heapq.heapreplace(heap,[item[0], item[1]])
+
+        return res
+
+
     def solution(self, barcodes):
 
         # first to get the frequency
