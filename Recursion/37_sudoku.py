@@ -43,6 +43,7 @@ class Solution:
         return full_set
 
     def check_table_candidate(self, row_i, col_i, board):
+        # check 9 x 9
         full_set = set(["1", "2", "3", "4", "5", "6", "7", "8", "9"])
         row_base = int(row_i / 3)
         col_base = int(col_i / 3)
